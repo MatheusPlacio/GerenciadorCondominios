@@ -16,6 +16,7 @@ namespace GerenciadorCondominios.BLL.Models
         [Range(0, int.MaxValue, ErrorMessage = "Valor inválido")]
         public decimal Valor { get; set; }
 
+
         [Display(Name = "Mês")]
         public int MesId { get; set; }
         public Mes Mes { get; set; }

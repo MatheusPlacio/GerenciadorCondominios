@@ -11,6 +11,7 @@ namespace GerenciadorCondominios.DAL.Mapeamentos
 {
     public class UsuarioMap : IEntityTypeConfiguration<Usuario>
     {
+        public DbSet<Usuario> Usuarios { get; set; }
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
@@ -20,8 +21,12 @@ namespace GerenciadorCondominios.DAL.Mapeamentos
             builder.Property(x => x.PrimeiroAcesso).IsRequired();
             builder.Property(x => x.Status).IsRequired();
 
-            builder.HasMany(x => x.ProprietariosApartamentos).WithOne(x => x.Proprietario);
-            builder.HasMany(x => x.MoradoresApartamentos).WithOne(x => x.Morador); // 1 morador pode ter varios Ap, e o AP 1 morador
+            builder.HasMany(x => x.ProprietariosApartamentos).WithOne(x => x.Proprietario); //HasMany (Muitos), WithOne (um)
+            builder.HasMany(x => x.MoradoresApartamentos).WithOne(x => x.Morador); //HasMany (Muitos), WithOne (um)
+            builder.HasMany(x => x.Veiculos).WithOne(x => x.Usuario); //HasMany (Muitos), WithOne (um)
+            builder.HasMany(x => x.Eventos).WithOne(x => x.Usuario); //HasMany (Muitos), WithOne (um)
+            builder.HasMany(x => x.Pagamentos).WithOne(x => x.Usuario); //HasMany (Muitos), WithOne (um)
+            builder.HasMany(x => x.Servicos).WithOne(x => x.Usuario); //HasMany (Muitos), WithOne (um)
         }
     }
 }
