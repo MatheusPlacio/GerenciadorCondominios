@@ -1,3 +1,4 @@
+using GerenciadorCondominios.BLL.Models;
 using GerenciadorCondominios.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,10 +18,17 @@ if (!app.Environment.IsDevelopment())
 }
 
 // Conexão com o banco de dados \/
-string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+string Connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataContext>(options =>
-                 options.UseMySql(mySqlConnection,
-                 ServerVersion.AutoDetect(mySqlConnection)));
+                  options.UseSqlServer(Connection));
+
+//string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<APICatalogContext>(options =>
+//                 options.UseMySql(mySqlConnection,
+//                 ServerVersion.AutoDetect(mySqlConnection)));
+
+
+//builder.Services.AddIdentity<Usuario, Funcao>().AddEntityFrameworkStores<DataContext>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

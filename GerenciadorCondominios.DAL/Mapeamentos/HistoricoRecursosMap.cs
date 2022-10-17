@@ -11,7 +11,7 @@ namespace GerenciadorCondominios.DAL.Mapeamentos
 {
     public class HistoricoRecursosMap : IEntityTypeConfiguration<HistoricoRecursos>
     {
-        public DbSet<HistoricoRecursos> HistoricoRecursos{ get; set; }
+        public DbSet<HistoricoRecursos> HistoricoRecursos { get; set; }
         public void Configure(EntityTypeBuilder<HistoricoRecursos> builder)
         {
             builder.HasKey(x => x.HistoricoRecursosId);

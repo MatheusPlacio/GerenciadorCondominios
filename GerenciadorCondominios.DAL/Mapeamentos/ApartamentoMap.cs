@@ -19,10 +19,15 @@ namespace GerenciadorCondominios.DAL.Mapeamentos
             builder.Property(x => x.Andar).IsRequired();
             builder.Property(x => x.Foto).IsRequired();
             builder.Property(x => x.ProprietarioId).IsRequired();
-            builder.Property(x => x.MoradorId).IsRequired();
+            builder.Property(x => x.MoradorId).IsRequired(false);
 
-            builder.HasOne(x => x.Proprietario).WithMany(x => x.ProprietariosApartamentos).HasForeignKey(x => x.ProprietarioId);
-            builder.HasOne(x => x.Morador).WithMany(x => x.MoradoresApartamentos).HasForeignKey(x => x.MoradorId);
+            builder.HasOne(x => x.Proprietario).WithMany(x => x.ProprietariosApartamentos)
+                .HasForeignKey(x => x.ProprietarioId)
+                .OnDelete(DeleteBehavior.NoAction); 
+
+            builder.HasOne(x => x.Morador).WithMany(x => x.MoradoresApartamentos)
+                .HasForeignKey(x => x.MoradorId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
