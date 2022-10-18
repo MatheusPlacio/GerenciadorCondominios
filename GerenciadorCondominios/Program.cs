@@ -7,6 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Conexão com o banco de dados \/
+string Connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<DataContext>(options =>
+                  options.UseSqlServer(Connection));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -17,10 +22,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// Conexão com o banco de dados \/
-string Connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DataContext>(options =>
-                  options.UseSqlServer(Connection));
+
 
 //string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<APICatalogContext>(options =>

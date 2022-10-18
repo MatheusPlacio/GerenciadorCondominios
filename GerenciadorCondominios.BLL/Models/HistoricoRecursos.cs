@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace GerenciadorCondominios.BLL.Models
     public class HistoricoRecursos
     {
         public int HistoricoRecursosId { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Valor { get; set; }
         public Tipos Tipo { get; set; }
         public int Dia { get; set; }

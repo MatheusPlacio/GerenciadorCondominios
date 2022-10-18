@@ -7,7 +7,8 @@ namespace GerenciadorCondominios.DAL.Context
 {
     public class DataContext : IdentityDbContext<Usuario, Funcao, string>
     {
-
+        public DataContext()
+        { }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         { }
         
@@ -25,6 +26,11 @@ namespace GerenciadorCondominios.DAL.Context
             builder.ApplyConfiguration(new ServicoPrediosMap());
             builder.ApplyConfiguration(new UsuarioMap());
             builder.ApplyConfiguration(new VeiculoMap());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+
         }
     }
 }
