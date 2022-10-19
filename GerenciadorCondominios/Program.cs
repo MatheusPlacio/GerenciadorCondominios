@@ -1,16 +1,25 @@
 using GerenciadorCondominios.BLL.Models;
 using GerenciadorCondominios.DAL.Context;
+using GerenciadorCondominios.DAL.Interfaces;
+using GerenciadorCondominios.DAL.Repositorios;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
 
 // Conexão com o banco de dados \/
 string Connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataContext>(options =>
                   options.UseSqlServer(Connection));
+
+builder.Services.AddIdentity<Usuario, Funcao>().AddEntityFrameworkStores<DbContext>();
+builder.Services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
+
 
 var app = builder.Build();
 
@@ -36,7 +45,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

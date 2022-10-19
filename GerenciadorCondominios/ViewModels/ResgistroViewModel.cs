@@ -2,7 +2,7 @@
 
 namespace GerenciadorCondominios.ViewModels
 {
-    public class ResgitroViewModel
+    public class ResgistroViewModel
     {
         [Required(ErrorMessage = "O Campo {0} é obrigatório")]
         [StringLength(40, ErrorMessage = "Use menos caracteres")]
